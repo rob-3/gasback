@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import {NavigationContainer} from "@react-navigation/native";
 import { createStackNavigator } from '@react-navigation/stack';
@@ -7,7 +6,6 @@ import SecondPage from "./secondPage";
 
 const Stack = createStackNavigator();
 const App = () => {
-
   return (
     <NavigationContainer>
       <Stack.Navigator>

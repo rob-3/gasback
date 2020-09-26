@@ -36,91 +36,85 @@ const styles = StyleSheet.create({
 
 
 const FirstPage = ({ navigation }) => {
-    //App State
-    const [buttonText, setButtonText] = useState("Start");
-    const [startLocation, setStartLocation] = useState(null);
-    const [tripCost, setTripCost] = useState(null);
-    const [make, setMake] = useState('');
-    const [model, setModel] = useState('');
-    const [mpg, setMpg] = useState('');
+  //App State
+  const [buttonText, setButtonText] = useState("Start");
+  const [startLocation, setStartLocation] = useState(null);
+  const [tripCost, setTripCost] = useState(null);
+  const [make, setMake] = useState('');
+  const [model, setModel] = useState('');
+  const [mpg, setMpg] = useState('');
 
-    const onPressHandler = async () => {
-        if (buttonText === "Start") {
-            setButtonText("Stop");
-            setStartLocation(await getCurrentLocation());
-        } else {
-            setButtonText("Start");
-            let end = await getCurrentLocation();
-            const [distance, gasPrices] = await Promise.all([
-                calcDistance(startLocation, end),
-                getGasPrice(end)
-            ]);
-
-            setTripCost(calculatePrice(gasPrices.gasoline, distance.value, 30));
-        }
-    };
-
-    let price;
-    if (tripCost !== null) {
-        price = <Text>{tripCost}</Text>
+  const onPressHandler = async () => {
+    if (buttonText === "Start") {
+      setButtonText("Stop");
+      setStartLocation(await getCurrentLocation());
     } else {
-        price = null;
+      setButtonText("Start");
+      let end = await getCurrentLocation();
+      const [distance, gasPrices] = await Promise.all([
+        calcDistance(startLocation, end),
+        getGasPrice(end)
+      ]);
+
+      setTripCost(calculatePrice(gasPrices.gasoline, distance.value, 30));
     }
+  };
 
-    //creates a list of Vehicle makes and uses the list to create a list of Picker.Item components
-    let makeList = Object.keys(vehicleData);
-    let makePickerList = makeList.map(make =>
-        <Picker.Item label={make} value={make} key={make}></Picker.Item>
-    )
+  let price = null;
+  if (tripCost !== null) {
+    price = <Text>{tripCost}</Text>
+  }
 
-    // creates a list of Picker.Items for the models of the supplied make
-    let modelList;
-    if (make !== '') {
-        modelList = Object.keys(vehicleData[make]).map(model =>
-            <Picker.Item label={model} value={model} key={model}></Picker.Item>
-        );
-    }
-    else {
+  //creates a list of Vehicle makes and uses the list to create a list of Picker.Item components
+  let makeList = Object.keys(vehicleData);
+  let makePickerList = makeList.map(make =>
+    <Picker.Item label={make} value={make} key={make}></Picker.Item>
+  )
 
-    }
-
-    return (
-        <View style={styles.container}>
-            <Text style ={styles.titleText}>GasBack</Text>
-            <Text style={styles.subtitleText}>{price}</Text>
-
-            {/* Make Picker */}
-            <Picker
-                selectedValue={make}
-                style={{...styles.textField, height: 50, width: 90, color: '#dbc2cf'}}
-                onValueChange={(itemValue) => {
-                    setMake(itemValue);
-                }}
-            >
-                <Picker.Item label='Please Select a Make' value=''></Picker.Item>
-                {makePickerList}
-            </Picker>
-
-            {/* model Picker */}
-            <Picker
-                selectedValue={model}
-                style={{...styles.textField, height: 50, width: 90}}
-                onValueChange={(itemValue) => {
-                    setModel(itemValue);
-                }}
-            >
-                {modelList}
-            </Picker>
-            <Button title={buttonText} onPress={onPressHandler} color='#b118c8' />
-            <Button
-                title="Go to Jane's profile"
-                onPress={() =>
-                    navigation.navigate('second')
-                }
-            />
-            <StatusBar style="auto" />
-        </View>
+  // creates a list of Picker.Items for the models of the supplied make
+  let modelList;
+  if (make !== '') {
+    modelList = Object.keys(vehicleData[make]).map(model =>
+      <Picker.Item label={model} value={model} key={model}></Picker.Item>
     );
+  }
+  return (
+    <View style={styles.container}>
+      <Text style ={styles.titleText}>GasBack</Text>
+      <Text style={styles.subtitleText}>{price}</Text>
+
+      {/* Make Picker */}
+      <Picker
+        selectedValue={make}
+        style={{...styles.textField, height: 50, width: 90, color: '#dbc2cf'}}
+        onValueChange={(itemValue) => {
+          setMake(itemValue);
+        }}
+      >
+        <Picker.Item label='Please Select a Make' value=''></Picker.Item>
+        {makePickerList}
+      </Picker>
+
+      {/* model Picker */}
+      <Picker
+        selectedValue={model}
+        style={{...styles.textField, height: 50, width: 90}}
+        onValueChange={(itemValue) => {
+          setModel(itemValue);
+        }}
+      >
+        {modelList}
+      </Picker>
+      <Button title={buttonText} onPress={onPressHandler} color='#b118c8' />
+      <Button
+        title="Go to Jane's profile"
+        onPress={() =>
+            navigation.navigate('second')
+        }
+      />
+      <StatusBar style="auto" />
+    </View>
+  );
 }
 
 export default FirstPage;
