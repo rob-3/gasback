@@ -86,7 +86,7 @@ const FirstPage = ({ navigation }) => {
       {/* Make Picker */}
       <Picker
         selectedValue={make}
-        style={{...styles.textField, height: 50, width: 90, color: '#dbc2cf'}}
+        style={{...styles.textField, height: 50, width: 300, color: '#dbc2cf'}}
         onValueChange={(itemValue) => {
           setMake(itemValue);
         }}
@@ -98,7 +98,7 @@ const FirstPage = ({ navigation }) => {
       {/* model Picker */}
       <Picker
         selectedValue={model}
-        style={{...styles.textField, height: 50, width: 90}}
+        style={{...styles.textField, height: 50, width: 300}}
         onValueChange={(itemValue) => {
           setModel(itemValue);
         }}
