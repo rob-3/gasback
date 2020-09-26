@@ -2,16 +2,14 @@ import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
 import { getCurrentLocation, calcDistance } from './locationFunctions';
-
-// This is where our environment vars are stored, including the API keys
-import {GOOGLE_API_KEY} from './App.config';
+import { getGasPrice } from './gasPriceAPI';
 
 export default function App() {
   //App State
   const [buttonText, setButtonText] = useState("Start");
   const [startLocation, setStartLocation] = useState(null);
   const [distance, setDistance] = useState(null);
-
+  const [gasPrices, setGasPrices] = useState(null);
 
   const onPressHandler = async () => {
     if (buttonText === "Start") {
@@ -21,6 +19,8 @@ export default function App() {
       setButtonText("Start");
       let end = await getCurrentLocation();
       setDistance(await calcDistance(startLocation, end));
+      //get Gas Prices based on ending location
+      setGetPrices(await getGasPrice(end));
     }
   };
 

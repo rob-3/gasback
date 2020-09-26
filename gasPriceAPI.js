@@ -1,9 +1,8 @@
-import * as Location from 'expo-location';
-
-export function getGasPrice(location) {
+//
+//location is a coord pair
+export async function getGasPrice(location) {
     var url = `https://api.collectapi.com/gasPrice/fromCoordinates?lng=${location[1]}&lat=${location[0]}`;
-
-    fetch(url , {
+    return fetch(url , {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -12,6 +11,7 @@ export function getGasPrice(location) {
     }).then((response) => response.json())
         .then((json) => {
             //Returns a result containing prices for all gasoline types
+            ret = json.result;
             return json.result;
         })
         .catch((error) => {
