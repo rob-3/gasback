@@ -3,6 +3,10 @@ import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
 import { getCurrentLocation, calcDistance } from './locationFunctions';
 
+// This is where our environment vars are stored, including the API keys
+const dotenv = require('dotenv');
+dotenv.config({path: './config.env'});
+
 export default function App() {
   const [buttonText, setButtonText] = useState("Start");
   const [startLocation, setStartLocation] = useState(null);
