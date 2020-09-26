@@ -1,9 +1,9 @@
 import * as Location from 'expo-location';
 
 // This is where our environment vars are stored, including the API keys
-const dotenv = require('dotenv').config(`./config.env`);
+import {GOOGLE_API_KEY} from './App.config';
 
-const distanceMatrixApi = `http://maps.googleapis.com/maps/api/distancematrix/json?units=`;
+const distanceMatrixApi = `https://maps.googleapis.com/maps/api/distancematrix/json?units=`;
 
 // Uses the Google Distance Matrix API to calculate the distance between the 2 suplied location parameters
 // Both parameters are coord pairs
@@ -32,7 +32,7 @@ export async function getCurrentLocation(){
 
 async function fetchDistanceData(currentLocation, destination, units = `metric`){
   const responce = await fetch(`${distanceMatrixApi}${units}&origins=${currentLocation[0]},${currentLocation[1]}` + 
-    `&destinations=${destination[0]},${destination[1]}&key=${process.env.GOOGLE_API_KEY}`)
+    `&destinations=${destination[0]},${destination[1]}&key=${GOOGLE_API_KEY}`)
     .then(r => r.json());
 
     return responce;
