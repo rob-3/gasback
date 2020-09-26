@@ -42,6 +42,7 @@ const App = () => {
   const [tripCost, setTripCost] = useState(null);
   const [make, setMake] = useState('');
   const [model, setModel] = useState('');
+  const [year, setYear] = useState('');
   const [mpg, setMpg] = useState('');
 
   const onPressHandler = async () => {
@@ -79,6 +80,21 @@ const App = () => {
     );
   }
 
+  // creates a list of Picker.Items for the years of the supplied make
+  let yearList;
+  if(model !== ''){
+    console.log(vehicleData[make][model])
+    yearList = vehicleData[make][model];
+    yearList = yearList.map(dataPair =>
+      dataPair['year']
+    );
+    console.log(yearList);
+    yearList = yearList.map(year =>
+      <Picker.Item label={year} value={year} key={year}></Picker.Item>
+    )
+    console.log(yearList);
+  }
+
   return (
     <View style={styles.container}>
       <Text style ={styles.titleText}>GasBack</Text>
@@ -105,7 +121,20 @@ const App = () => {
         }}
       >
         {modelList}
-      </Picker>
+        </Picker>
+
+        {/* Year Picker */}
+        <Picker
+        selectedValue={year}
+        style={{...styles.textField, height: 50, width: 90}}
+        onValueChange={(itemValue) => {
+          setYear(itemValue);
+        }}
+        >
+        {yearList}
+        </Picker>
+
+
       <Button title={buttonText} onPress={onPressHandler} color='#b118c8' />
       <StatusBar style="auto" />
     </View>
