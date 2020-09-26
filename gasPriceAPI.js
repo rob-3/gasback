@@ -11,7 +11,6 @@ export async function getGasPrice(location) {
     }).then((response) => response.json())
         .then((json) => {
             //Returns a result containing prices for all gasoline types
-            ret = json.result;
             return json.result;
         })
         .catch((error) => {
