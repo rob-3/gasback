@@ -33,7 +33,8 @@ export async function getCurrentLocation(){
 async function fetchDistanceData(currentLocation, destination, units = `metric`){
   const responce = await fetch(`${distanceMatrixApi}${units}&origins=${currentLocation[0]},${currentLocation[1]}` + 
     `&destinations=${destination[0]},${destination[1]}&key=${GOOGLE_API_KEY}`)
-    .then(r => r.json());
+    .then(r => r.json())
+    .catch(err => console.log(err));
 
     return responce;
 }
