@@ -97,6 +97,23 @@ const App = () => {
 
   }
 
+  //
+  let yearList;
+  if(model !== ''){
+    console.log(vehicleData[make][model])
+    yearList = vehicleData[make][model];
+    yearList = yearList.map(dataPair =>
+      dataPair['year']
+    );
+    console.log(yearList);
+    yearList = yearList.map(year =>
+      <Picker.Item label={year} value={year} key={year}></Picker.Item>
+    )
+    console.log(yearList);
+
+
+  }
+
   return (
     <View style={styles.container}>
       <Text style ={styles.titleText}>GasBack</Text>
