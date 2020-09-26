@@ -13,6 +13,7 @@ const App = React.forwardRef( (props, ref) => {
   const [tripCost, setTripCost] = useState(null);
   const [make, setMake] = useState('');
   const [model, setModel] = useState('');
+  const [mpg, setMpg] = useState('');
 
   const onPressHandler = async () => {
     if (buttonText === "Start") {
@@ -39,17 +40,16 @@ const App = React.forwardRef( (props, ref) => {
 
   //creates a list of Vehicle makes and uses the list to create a list of Picker.Item components
   let makeList = Object.keys(vehicleData);
-  console.log(makeList);
   let makePickerList = makeList.map(make => 
     <Picker.Item label={make} value={make} key={make}></Picker.Item>
   )
-
+  
+  // creates a list of Picker.Items for the models of the supplied make
   let modelList;
   if(make !== ''){
     modelList = Object.keys(vehicleData[make]).map(model =>
       <Picker.Item label={model} value={model} key={model}></Picker.Item>
       );
-    console.log(modelList);
   }
 
   return (
@@ -60,7 +60,7 @@ const App = React.forwardRef( (props, ref) => {
       {/* Make Picker */}
       <Picker
         selectedValue={make}
-        style={{height: 50, width: 100}}
+        style={{height: 50, width: '90vw'}}
         onValueChange={(itemValue, itemIndex) => {
           setMake(itemValue);
         }}
@@ -72,7 +72,7 @@ const App = React.forwardRef( (props, ref) => {
         {/* model Picker */}
       <Picker
         selectedValue={model}
-        style={{height: 50, width: 100}}
+        style={{height: 50, width: '90vw'}}
         onValueChange={(itemValue, itemIndex) => {
           setModel(itemValue);
         }}
