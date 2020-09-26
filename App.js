@@ -10,6 +10,8 @@ export default function App() {
   const [startLocation, setStartLocation] = useState(null);
   const [distance, setDistance] = useState(null);
   const [gasPrices, setGasPrices] = useState(null);
+  const [tripCost, setTripCost] = useState(null);
+  
 
   const onPressHandler = async () => {
     if (buttonText === "Start") {
@@ -20,7 +22,9 @@ export default function App() {
       let end = await getCurrentLocation();
       setDistance(await calcDistance(startLocation, end));
       //get Gas Prices based on ending location
-      setGasPrices(await getGasPrice(end));
+      let tempGasPrices = await getGasPrice(end); 
+      setGasPrices(tempGasPrices);
+      setTripCost(calculatePrice(tempGasPrices.gasoline, 528000, 30));
     }
   };
 
@@ -43,3 +47,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
+
+function calculatePrice(gasPrice, distance, mpg){
+  console.log(`Price - ${gasPrice}, distance - ${distance}, mpg - ${mpg}`);
+  let ret = (distance / 1760) / mpg;
+  console.log(`(distance / 1760) / mpg = ${ret}`);
+  ret = ret * gasPrice;
+  console.log(`ret * gasPrice = ${ret}`);
+  return Math.round(ret * 100) / 100;
+}
