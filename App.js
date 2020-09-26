@@ -23,12 +23,12 @@ const styles = StyleSheet.create({
     color: '#5bc0be',
     marginBottom: 20
   },
-  textField: { 
-    height: 40, 
-    width: 100, 
-    borderColor: '#dbc2cf', 
-    borderWidth: 1, 
-    color: '#dbc2cf', 
+  textField: {
+    height: 40,
+    width: 100,
+    borderColor: '#dbc2cf',
+    borderWidth: 1,
+    color: '#dbc2cf',
     textAlign: 'center',
     marginBottom: 20
   }
@@ -55,7 +55,7 @@ const App = () => {
         calcDistance(startLocation, end),
         getGasPrice(end)
       ]);
-      
+
       setTripCost(calculatePrice(gasPrices.gasoline, distance.value, 30));
     }
   };
@@ -69,16 +69,19 @@ const App = () => {
 
   //creates a list of Vehicle makes and uses the list to create a list of Picker.Item components
   let makeList = Object.keys(vehicleData);
-  let makePickerList = makeList.map(make => 
+  let makePickerList = makeList.map(make =>
     <Picker.Item label={make} value={make} key={make}></Picker.Item>
   )
-  
+
   // creates a list of Picker.Items for the models of the supplied make
   let modelList;
   if (make !== '') {
     modelList = Object.keys(vehicleData[make]).map(model =>
       <Picker.Item label={model} value={model} key={model}></Picker.Item>
     );
+  }
+  else {
+
   }
 
   return (
@@ -94,6 +97,7 @@ const App = () => {
           setMake(itemValue);
         }}
       >
+        <Picker.Item label='Please Select a Make' value=''></Picker.Item>
         {makePickerList}
       </Picker>
 
