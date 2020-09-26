@@ -8,10 +8,13 @@ const dotenv = require('dotenv');
 dotenv.config({path: './config.env'});
 
 export default function App() {
+  //App State
   const [buttonText, setButtonText] = useState("Start");
   const [startLocation, setStartLocation] = useState(null);
   const [endLocation, setEndLocation] = useState(null);
   const [distance, setDistance] = useState(null);
+
+
   const onPressHandler = async () => {
     if (buttonText === "Start") {
       setButtonText("Stop");
@@ -20,9 +23,11 @@ export default function App() {
       setButtonText("Start");
       let end = await getCurrentLocation();
       setEndLocation(end);
-      setDistance(calcDistance(startLocation, end));
+      setDistance( await calcDistance(startLocation, end));
     }
   };
+
+
   return (
     <View style={styles.container}>
       <Text>Open up App.js to start working on your app!</Text>
