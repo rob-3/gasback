@@ -6,7 +6,7 @@ import { getGasPrice } from './gasPriceAPI';
 import { Picker } from '@react-native-community/picker';
 import vehicleData from './vehicleData.json';
 
-const App = React.forwardRef( (props, ref) => {
+const App = () => {
   //App State
   const [buttonText, setButtonText] = useState("Start");
   const [startLocation, setStartLocation] = useState(null);
@@ -61,10 +61,9 @@ const App = React.forwardRef( (props, ref) => {
       <Picker
         selectedValue={make}
         style={{height: 50, width: 100}}
-        onValueChange={(itemValue, itemIndex) => {
+        onValueChange={(itemValue) => {
           setMake(itemValue);
         }}
-        ref={ref}
         >
         {makePickerList}
         </Picker>
@@ -73,10 +72,9 @@ const App = React.forwardRef( (props, ref) => {
       <Picker
         selectedValue={model}
         style={{height: 50, width: 100}}
-        onValueChange={(itemValue, itemIndex) => {
+        onValueChange={(itemValue) => {
           setModel(itemValue);
         }}
-        ref={ref}
         >
         {modelList}
         </Picker>
@@ -85,7 +83,6 @@ const App = React.forwardRef( (props, ref) => {
     </View>
   );
 }
-);
 
 export default App;
 
