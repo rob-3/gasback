@@ -1,12 +1,39 @@
 import { StatusBar } from 'expo-status-bar';
-import React, { useState, Component } from 'react';
-import { StyleSheet, Text, View, Button, TextInput } from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, Text, View, Button } from 'react-native';
 import { getCurrentLocation, calcDistance } from './locationFunctions';
 import { getGasPrice } from './gasPriceAPI';
 import { Picker } from '@react-native-community/picker';
 import vehicleData from './vehicleData.json';
-import DropDownPicker from 'react-native-dropdown-picker';
-import Icon from 'react-native-vector-icons/FontAwesome';
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#0b132b',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  titleText: {
+    fontSize: 80,
+    color: '#6fffe9',
+    marginBottom: 20
+  },
+  subtitleText: {
+    fontSize: 20,
+    color: '#5bc0be',
+    marginBottom: 20
+  },
+  textField: { 
+    height: 40, 
+    width: 100, 
+    borderColor: '#dbc2cf', 
+    borderWidth: 1, 
+    color: '#dbc2cf', 
+    textAlign: 'center',
+    marginBottom: 20
+  }
+});
+
 
 const App = () => {
   //App State
@@ -87,37 +114,6 @@ const App = () => {
 }
 
 export default App;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#0b132b',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  titleText: {
-    fontSize: 80,
-    color: '#6fffe9',
-    marginBottom: 20
-  },
-  subtitleText: {
-    fontSize: 20,
-    color: '#5bc0be',
-    marginBottom: 20
-  },
-  textField: { 
-    height: 40, 
-    width: 100, 
-    borderColor: '#dbc2cf', 
-    borderWidth: 1, 
-    color: '#dbc2cf', 
-    textAlign: 'center',
-    marginBottom: 20
-  },
-  ddp: {
-    marginBottom: 20
-  }
-});
 
 function calculatePrice(gasPrice, distance, mpg){
   console.log(`Price - ${gasPrice}, distance - ${distance}, mpg - ${mpg}`);
