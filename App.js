@@ -4,9 +4,9 @@ import { StyleSheet, Text, View, Button } from 'react-native';
 import { getCurrentLocation, calcDistance } from './locationFunctions';
 import { getGasPrice } from './gasPriceAPI';
 import { Picker } from '@react-native-community/picker';
+import vehicleData from './vehicleData.json';
 
-
-export default function App() {
+const App = React.forwardRef( (props, ref) => {
   //App State
   const [buttonText, setButtonText] = useState("Start");
   const [startLocation, setStartLocation] = useState(null);
@@ -37,7 +37,9 @@ export default function App() {
     price = null;
   }
 
-  let makeList = ['a', 'b', 'c', 'd'].map(make => 
+  let makeList = Object.keys(vehicleData);
+  console.log(makeList);
+  let makePickerList = makeList.map(make => 
     <Picker.Item label={make} value={make} key={make}></Picker.Item>
   )
 
@@ -51,15 +53,18 @@ export default function App() {
         onValueChange={(itemValue, itemIndex) => {
           setMake(itemValue);
         }}
+        ref={ref}
         >
-          
-        {makeList}
+        {makePickerList}
         </Picker>
       <Button title={buttonText} onPress={onPressHandler}/>
       <StatusBar style="auto" />
     </View>
   );
 }
+);
+
+export default App;
 
 const styles = StyleSheet.create({
   container: {
