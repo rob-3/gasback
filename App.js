@@ -145,7 +145,7 @@ const App = () => {
         {/* Year Picker */}
         <Picker
         selectedValue={year}
-        style={{...styles.textField, height: 50, width: '90vw'}}
+        style={{...styles.textField, height: 50, width: 90}}
         onValueChange={(itemValue) => {
           setYear(itemValue);
         }}
