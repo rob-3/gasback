@@ -123,9 +123,6 @@ const App = () => {
         }}
       >
         {modelList}
-<<<<<<< HEAD
-      </Picker>
-=======
         </Picker>
 
         {/* Year Picker */}
@@ -140,7 +137,6 @@ const App = () => {
         </Picker>
 
 
->>>>>>> f45e1d3... Added yearList
       <Button title={buttonText} onPress={onPressHandler} color='#b118c8' />
       <StatusBar style="auto" />
     </View>
