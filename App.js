@@ -3,13 +3,16 @@ import React, { useState } from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
 import { getCurrentLocation, calcDistance } from './locationFunctions';
 import { getGasPrice } from './gasPriceAPI';
+import { Picker } from '@react-native-community/picker';
+
 
 export default function App() {
   //App State
   const [buttonText, setButtonText] = useState("Start");
   const [startLocation, setStartLocation] = useState(null);
   const [tripCost, setTripCost] = useState(null);
-  
+  const [make, setMake] = useState('');
+  const [model, setModel] = useState(null);
 
   const onPressHandler = async () => {
     if (buttonText === "Start") {
@@ -34,10 +37,24 @@ export default function App() {
     price = null;
   }
 
+  let makeList = ['a', 'b', 'c', 'd'].map(make => 
+    <Picker.Item label={make} value={make} key={make}></Picker.Item>
+  )
+
   return (
     <View style={styles.container}>
       <Text>Open up App.js to start working on your app!</Text>
       {price}
+      <Picker
+        selectedValue={make}
+        style={{height: 50, width: 100}}
+        onValueChange={(itemValue, itemIndex) => {
+          setMake(itemValue);
+        }}
+        >
+          
+        {makeList}
+        </Picker>
       <Button title={buttonText} onPress={onPressHandler}/>
       <StatusBar style="auto" />
     </View>
