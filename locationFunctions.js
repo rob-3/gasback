@@ -7,8 +7,8 @@ export function getGeocode(destination){
 }
 
 
-export function calcDistance(destination){
-
+export function calcDistance(currentLocation, destination){
+  return 5;
 }
 
 export async function getCurrentLocation(){

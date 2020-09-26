@@ -1,16 +1,29 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import * as Location from 'expo-location';
+import { StyleSheet, Text, View, Button } from 'react-native';
+import { getCurrentLocation, calcDistance } from './locationFunctions';
 
 export default function App() {
-
-  
-
+  const [buttonText, setButtonText] = useState("Start");
+  const [startLocation, setStartLocation] = useState(null);
+  const [endLocation, setEndLocation] = useState(null);
+  const [distance, setDistance] = useState(null);
+  const onPressHandler = async () => {
+    if (buttonText === "Start") {
+      setButtonText("Stop");
+      setStartLocation(await getCurrentLocation());
+    } else {
+      setButtonText("Start");
+      let end = await getCurrentLocation();
+      setEndLocation(end);
+      setDistance(calcDistance(startLocation, end));
+    }
+  };
   return (
     <View style={styles.container}>
       <Text>Open up App.js to start working on your app!</Text>
-      <Text>{text}</Text>
+      <Text>{distance}</Text>
+      <Button title={buttonText} onPress={onPressHandler}/>
       <StatusBar style="auto" />
     </View>
   );
