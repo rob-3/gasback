@@ -60,11 +60,9 @@ const App = () => {
     }
   };
 
-  let price;
+  let price = null;
   if (tripCost !== null) {
     price = <Text>{tripCost}</Text>
-  } else {
-    price = null;
   }
 
   //creates a list of Vehicle makes and uses the list to create a list of Picker.Item components
@@ -79,9 +77,6 @@ const App = () => {
     modelList = Object.keys(vehicleData[make]).map(model =>
       <Picker.Item label={model} value={model} key={model}></Picker.Item>
     );
-  }
-  else {
-
   }
 
   return (
