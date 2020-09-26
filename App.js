@@ -20,7 +20,7 @@ export default function App() {
       let end = await getCurrentLocation();
       setDistance(await calcDistance(startLocation, end));
       //get Gas Prices based on ending location
-      setGetPrices(await getGasPrice(end));
+      setGasPrices(await getGasPrice(end));
     }
   };
 
