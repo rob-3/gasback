@@ -11,7 +11,7 @@ export async function calcDistance(currentLocation, destination, units = `metric
   const distanceJson = await fetchDistanceData(currentLocation, destination, units);
 
   //distanceData hold both a text property and a value property
-  const distanceData = distanceJson.rows.elements.distance
+  const distanceData = distanceJson.rows[0].elements[0].distance;
   return distanceData;
 }
 

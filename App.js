@@ -28,7 +28,7 @@ export default function App() {
   return (
     <View style={styles.container}>
       <Text>Open up App.js to start working on your app!</Text>
-      <Text>{distance}</Text>
+      <Text>{JSON.stringify(distance)}</Text>
       <Button title={buttonText} onPress={onPressHandler}/>
       <StatusBar style="auto" />
     </View>
