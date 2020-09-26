@@ -61,9 +61,9 @@ const App = () => {
   };
 
   let price;
-  if(tripCost !== null){
+  if (tripCost !== null) {
     price = <Text>{tripCost}</Text>
-  }else{
+  } else {
     price = null;
   }
 
@@ -75,10 +75,10 @@ const App = () => {
   
   // creates a list of Picker.Items for the models of the supplied make
   let modelList;
-  if(make !== ''){
+  if (make !== '') {
     modelList = Object.keys(vehicleData[make]).map(model =>
       <Picker.Item label={model} value={model} key={model}></Picker.Item>
-      );
+    );
   }
 
   return (
@@ -93,9 +93,9 @@ const App = () => {
         onValueChange={(itemValue) => {
           setMake(itemValue);
         }}
-        >
+      >
         {makePickerList}
-        </Picker>
+      </Picker>
 
         {/* model Picker */}
       <Picker
@@ -104,9 +104,9 @@ const App = () => {
         onValueChange={(itemValue) => {
           setModel(itemValue);
         }}
-        >
+      >
         {modelList}
-        </Picker>
+      </Picker>
       <Button title={buttonText} onPress={onPressHandler} color='#b118c8' />
       <StatusBar style="auto" />
     </View>
