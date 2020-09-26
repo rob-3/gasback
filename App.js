@@ -1,10 +1,12 @@
 import { StatusBar } from 'expo-status-bar';
-import React, { useState } from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import React, { useState, Component } from 'react';
+import { StyleSheet, Text, View, Button, TextInput } from 'react-native';
 import { getCurrentLocation, calcDistance } from './locationFunctions';
 import { getGasPrice } from './gasPriceAPI';
 import { Picker } from '@react-native-community/picker';
 import vehicleData from './vehicleData.json';
+import DropDownPicker from 'react-native-dropdown-picker';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 const App = () => {
   //App State
@@ -54,13 +56,13 @@ const App = () => {
 
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      {price}
+      <Text style ={styles.titleText}>GasBack</Text>
+      <Text style={styles.subtitleText}>{price}</Text>
 
       {/* Make Picker */}
       <Picker
         selectedValue={make}
-        style={{height: 50, width: '90vw'}}
+        style={{...styles.textField, height: 50, width: '90vw', color: '#dbc2cf'}}
         onValueChange={(itemValue) => {
           setMake(itemValue);
         }}
@@ -71,14 +73,14 @@ const App = () => {
         {/* model Picker */}
       <Picker
         selectedValue={model}
-        style={{height: 50, width: '90vw'}}
+        style={{...styles.textField, height: 50, width: '90vw'}}
         onValueChange={(itemValue) => {
           setModel(itemValue);
         }}
         >
         {modelList}
         </Picker>
-      <Button title={buttonText} onPress={onPressHandler}/>
+      <Button title={buttonText} onPress={onPressHandler} color='#b118c8' />
       <StatusBar style="auto" />
     </View>
   );
@@ -89,10 +91,32 @@ export default App;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#0b132b',
     alignItems: 'center',
     justifyContent: 'center',
   },
+  titleText: {
+    fontSize: 80,
+    color: '#6fffe9',
+    marginBottom: 20
+  },
+  subtitleText: {
+    fontSize: 20,
+    color: '#5bc0be',
+    marginBottom: 20
+  },
+  textField: { 
+    height: 40, 
+    width: 100, 
+    borderColor: '#dbc2cf', 
+    borderWidth: 1, 
+    color: '#dbc2cf', 
+    textAlign: 'center',
+    marginBottom: 20
+  },
+  ddp: {
+    marginBottom: 20
+  }
 });
 
 function calculatePrice(gasPrice, distance, mpg){
