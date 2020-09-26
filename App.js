@@ -12,7 +12,7 @@ const App = React.forwardRef( (props, ref) => {
   const [startLocation, setStartLocation] = useState(null);
   const [tripCost, setTripCost] = useState(null);
   const [make, setMake] = useState('');
-  const [model, setModel] = useState(null);
+  const [model, setModel] = useState('');
 
   const onPressHandler = async () => {
     if (buttonText === "Start") {
@@ -37,16 +37,27 @@ const App = React.forwardRef( (props, ref) => {
     price = null;
   }
 
+  //creates a list of Vehicle makes and uses the list to create a list of Picker.Item components
   let makeList = Object.keys(vehicleData);
   console.log(makeList);
   let makePickerList = makeList.map(make => 
     <Picker.Item label={make} value={make} key={make}></Picker.Item>
   )
 
+  let modelList;
+  if(make !== ''){
+    modelList = Object.keys(vehicleData[make]).map(model =>
+      <Picker.Item label={model} value={model} key={model}></Picker.Item>
+      );
+    console.log(modelList);
+  }
+
   return (
     <View style={styles.container}>
       <Text>Open up App.js to start working on your app!</Text>
       {price}
+
+      {/* Make Picker */}
       <Picker
         selectedValue={make}
         style={{height: 50, width: 100}}
@@ -56,6 +67,18 @@ const App = React.forwardRef( (props, ref) => {
         ref={ref}
         >
         {makePickerList}
+        </Picker>
+
+        {/* model Picker */}
+      <Picker
+        selectedValue={model}
+        style={{height: 50, width: 100}}
+        onValueChange={(itemValue, itemIndex) => {
+          setModel(itemValue);
+        }}
+        ref={ref}
+        >
+        {modelList}
         </Picker>
       <Button title={buttonText} onPress={onPressHandler}/>
       <StatusBar style="auto" />
