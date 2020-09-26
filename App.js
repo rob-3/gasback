@@ -82,7 +82,7 @@ const App = () => {
     );
   }
 
-  //
+  // creates a list of Picker.Items for the years of the supplied make
   let yearList;
   if(model !== ''){
     console.log(vehicleData[make][model])
@@ -95,25 +95,6 @@ const App = () => {
       <Picker.Item label={year} value={year} key={year}></Picker.Item>
     )
     console.log(yearList);
-
-
-  }
-
-  //
-  let yearList;
-  if(model !== ''){
-    console.log(vehicleData[make][model])
-    yearList = vehicleData[make][model];
-    yearList = yearList.map(dataPair =>
-      dataPair['year']
-    );
-    console.log(yearList);
-    yearList = yearList.map(year =>
-      <Picker.Item label={year} value={year} key={year}></Picker.Item>
-    )
-    console.log(yearList);
-
-
   }
 
   return (
