@@ -1,2 +1,2 @@
 //Enter API Key here
-export const apiKey = null;
+export const GOOGLE_API_KEY = 'AIzaSyD6t_xADteNJoM_L1uFQRRZczYky3cwwfo';

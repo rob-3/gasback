@@ -4,8 +4,7 @@ import { StyleSheet, Text, View, Button } from 'react-native';
 import { getCurrentLocation, calcDistance } from './locationFunctions';
 
 // This is where our environment vars are stored, including the API keys
-const dotenv = require('dotenv');
-dotenv.config({path: './config.env'});
+import {GOOGLE_API_KEY} from './App.config';
 
 export default function App() {
   //App State
