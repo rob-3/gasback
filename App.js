@@ -8,8 +8,6 @@ export default function App() {
   //App State
   const [buttonText, setButtonText] = useState("Start");
   const [startLocation, setStartLocation] = useState(null);
-  const [distance, setDistance] = useState(null);
-  const [gasPrices, setGasPrices] = useState(null);
   const [tripCost, setTripCost] = useState(null);
   
 
@@ -20,19 +18,26 @@ export default function App() {
     } else {
       setButtonText("Start");
       let end = await getCurrentLocation();
-      setDistance(await calcDistance(startLocation, end));
-      //get Gas Prices based on ending location
-      let tempGasPrices = await getGasPrice(end); 
-      setGasPrices(tempGasPrices);
-      setTripCost(calculatePrice(tempGasPrices.gasoline, 528000, 30));
+      const [distance, gasPrices] = await Promise.all([
+        calcDistance(startLocation, end),
+        getGasPrice(end)
+      ]);
+      
+      setTripCost(calculatePrice(gasPrices.gasoline, distance.value, 30));
     }
   };
 
+  let price;
+  if(tripCost !== null){
+    price = <Text>{tripCost}</Text>
+  }else{
+    price = null;
+  }
 
   return (
     <View style={styles.container}>
       <Text>Open up App.js to start working on your app!</Text>
-      <Text>{JSON.stringify(distance)}</Text>
+      {price}
       <Button title={buttonText} onPress={onPressHandler}/>
       <StatusBar style="auto" />
     </View>
