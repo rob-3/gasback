@@ -7,6 +7,7 @@ const distanceMatrixApi = `https://maps.googleapis.com/maps/api/distancematrix/j
 
 // Uses the Google Distance Matrix API to calculate the distance between the 2 suplied location parameters
 // Both parameters are coord pairs
+// returns distanceData which hold text and value fields
 export async function calcDistance(currentLocation, destination){
   const distanceJson = await fetchDistanceData(currentLocation, destination, 'imperial');
 
