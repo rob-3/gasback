@@ -49,6 +49,8 @@ const FirstPage = ({ navigation }) => {
     if (buttonText === "Start") {
       setButtonText("Stop");
       setStartLocation(await getCurrentLocation());
+    } else if('' === year){
+      setButtonText('Pick Car');
     } else {
       setButtonText("Start");
       let end = await getCurrentLocation();
@@ -103,6 +105,7 @@ const FirstPage = ({ navigation }) => {
         onValueChange={(itemValue) => {
           setMake(itemValue);
           setModel('');
+          setYear('');
         }}
       >
         <Picker.Item label='Please Select a Make' value=''></Picker.Item>
@@ -115,8 +118,10 @@ const FirstPage = ({ navigation }) => {
         style={{...styles.textField, height: 50, width: 300, color: '#dbc2cf'}}
         onValueChange={(itemValue) => {
           setModel(itemValue);
+          setYear('');
         }}
       >
+        <Picker.Item label='Please Select a Model' value=''></Picker.Item>
         {modelList}
       </Picker>
 
@@ -126,6 +131,7 @@ const FirstPage = ({ navigation }) => {
         style={{...styles.textField, height: 50, width: 300, color: '#dbc2cf'}}
         onValueChange={itemValue => setYear(itemValue)}
       >
+        <Picker.Item label='Please Select a Year' value=''></Picker.Item>
         {yearList}
       </Picker>
 
