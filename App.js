@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import {NavigationContainer} from "@react-navigation/native";
 import { createStackNavigator } from '@react-navigation/stack';
@@ -11,8 +10,8 @@ const App = () => {
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen
-            name="Home"
-            component={FirstPage}
+          name="Home"
+          component={FirstPage}
         />
         <Stack.Screen name="Results" component={SecondPage} />
       </Stack.Navigator>

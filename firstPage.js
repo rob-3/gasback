@@ -9,31 +9,31 @@ import vehicleData from './vehicleData.json';
 import { getData, storeData } from './persistence';
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#0b132b',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    titleText: {
-        fontSize: 80,
-        color: '#6fffe9',
-        marginBottom: 20
-    },
-    subtitleText: {
-        fontSize: 20,
-        color: '#5bc0be',
-        marginBottom: 20
-    },
-    textField: {
-        height: 40,
-        width: 100,
-        borderColor: '#dbc2cf',
-        borderWidth: 1,
-        color: '#dbc2cf',
-        textAlign: 'center',
-        marginBottom: 20
-    }
+  container: {
+    flex: 1,
+    backgroundColor: '#0b132b',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  titleText: {
+    fontSize: 80,
+    color: '#6fffe9',
+    marginBottom: 20
+  },
+  subtitleText: {
+    fontSize: 20,
+    color: '#5bc0be',
+    marginBottom: 20
+  },
+  textField: {
+    height: 40,
+    width: 100,
+    borderColor: '#dbc2cf',
+    borderWidth: 1,
+    color: '#dbc2cf',
+    textAlign: 'center',
+    marginBottom: 20
+  }
 });
 
 
@@ -142,11 +142,11 @@ const FirstPage = ({ navigation }) => {
 
       <Button title={buttonText} onPress={onPressHandler} color='#b118c8' />
       <Button
-      title="Log Persistance Data"
-      onPress={() =>
-          console.log(getData('@make'))
-      }
-    />
+        title="Log Persistance Data"
+        onPress={() =>
+            console.log(getData('@make'))
+        }
+      />
       <StatusBar style="auto" />
     </View>
   );
