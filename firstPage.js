@@ -60,7 +60,7 @@ const FirstPage = ({ navigation }) => {
             milesTravel = distance.value;
             gasPricy = gasPrices.gasoline;
             setTripCost(calculatePrice(gasPrices.gasoline, distance.value, 30));
-            navigation.navigate('second', {miles: milesTravel, mpg: mpg, gasPrice: gasPricy})
+            navigation.navigate('second', {miles: 10, mpg: 20, gasPrice: 30})
         }
     };
 
