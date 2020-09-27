@@ -110,7 +110,7 @@ const FirstPage = ({ navigation }) => {
             <Button
                 title="Go to Jane's profile"
                 onPress={() =>
-                    navigation.navigate('second', {miles: 100, mpg: 100, gasPrice: 100})
+                    navigation.navigate('second', {miles: 2000, mpg: 100, gasPrice: 100})
                 }
             />
             <StatusBar style="auto" />
