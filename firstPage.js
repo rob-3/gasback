@@ -45,7 +45,7 @@ const FirstPage = ({ navigation }) => {
   const [make, setMake] = useState('');
   const [model, setModel] = useState('');
   const [year, setYear] = useState('');
-  const [mpg, setMpg] = useState('');
+  //const [mpg, setMpg] = useState('');
 
   const onPressHandler = async () => {
     if (buttonText === "Start") {
@@ -58,7 +58,8 @@ const FirstPage = ({ navigation }) => {
         calcDistance(startLocation, end),
         getGasPrice(end)
       ]);
-      navigation.navigate('Results', { miles: distance.value, mpg: 30, gasPrice: gasPrices.gasoline});
+      const mpg = vehicleData[make][model][year].mpg;
+      navigation.navigate('Results', { miles: distance.value, mpg, gasPrice: gasPrices.gasoline});
     }
   };
 
