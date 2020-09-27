@@ -5,6 +5,7 @@ import { getCurrentLocation, calcDistance } from './locationFunctions';
 import { getGasPrice } from './gasPriceAPI';
 import { Picker } from '@react-native-community/picker';
 import vehicleData from './vehicleData.json';
+import { storeMake } from './persistence';
 
 const styles = StyleSheet.create({
     container: {
