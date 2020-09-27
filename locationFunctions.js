@@ -23,7 +23,7 @@ export async function calcDistance(currentLocation, destination){
 export async function getCurrentLocation(){
   let status = null;
   try {
-    status = await (await Location.requestPermissionsAsync()).status;
+    status = (await Location.requestPermissionsAsync()).status;
   } catch (error) {
     console.log(error);
   }
