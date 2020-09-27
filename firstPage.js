@@ -107,7 +107,7 @@ const FirstPage = ({ navigation }) => {
             >
                 {modelList}
             </Picker>
-            <Button disabled={make == '' ? true : false} title={buttonText} onPress={onPressHandler} color='#b118c8' />
+            <Button disabled={make === '' ? true : false} title={buttonText} onPress={onPressHandler} color='#b118c8' />
             <Button
                 title="Go to Jane's profile"
                 onPress={() =>
