@@ -39,10 +39,10 @@ const SecondPage = ({route, navigation }) => {
 
 return(
     <View style={styles.container}>
-        <Text style={styles.titleText}>Amount Owed: $x.xx</Text>
-        <Text style={styles.subtitleText}>  Distance: {route.miles} </Text>
-        <Text style={styles.subtitleText}>  Gas Price: $ {route.miles} </Text>
-        <Text style={styles.subtitleText}>  MPG:{route.mpg}</Text>
+        <Text style={styles.titleText}>Amount Owed: ${JSON.stringify(calculatePrice(route.params.gasPrice, route.params.miles, route.params.mpg))}</Text>
+        <Text style={styles.subtitleText}>  Distance: {JSON.stringify(route.params.miles)} </Text>
+        <Text style={styles.subtitleText}>  Gas Price: ${JSON.stringify(route.params.gasPrice)} </Text>
+        <Text style={styles.subtitleText}>  MPG: {JSON.stringify(route.params.mpg)}</Text>
 
         <Text>
             <Text style={styles.subtitleText}>  Tip:</Text>
@@ -66,3 +66,12 @@ return(
 
 }
 export default SecondPage;
+
+function calculatePrice(gasPrice, distance, mpg){
+    console.log(`Price - ${gasPrice}, distance - ${distance}, mpg - ${mpg}`);
+    let ret = (distance / 1760) / mpg;
+    console.log(`(distance / 1760) / mpg = ${ret}`);
+    ret = ret * gasPrice;
+    console.log(`ret * gasPrice = ${ret}`);
+    return Math.round(ret * 100) / 100;
+}

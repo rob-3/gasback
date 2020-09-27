@@ -59,17 +59,9 @@ const FirstPage = ({ navigation }) => {
             ]);
             milesTravel = distance.value;
             gasPricy = gasPrices.gasoline;
-            setTripCost(calculatePrice(gasPrices.gasoline, distance.value, 30));
-            navigation.navigate('second', {miles: 10, mpg: 20, gasPrice: 30})
+            navigation.navigate('second', { miles: milesTravel, mpg: 30, gasPrice: gasPricy});
         }
     };
-
-    let price;
-    if (tripCost !== null) {
-        price = <Text>{tripCost}</Text>
-    } else {
-        price = null;
-    }
 
     //creates a list of Vehicle makes and uses the list to create a list of Picker.Item components
     let makeList = Object.keys(vehicleData);
@@ -91,12 +83,11 @@ const FirstPage = ({ navigation }) => {
     return (
         <View style={styles.container}>
             <Text style ={styles.titleText}>GasBack</Text>
-            <Text style={styles.subtitleText}>{price}</Text>
 
             {/* Make Picker */}
             <Picker
                 selectedValue={make}
-                style={{...styles.textField, height: 50, width: 90, color: '#dbc2cf'}}
+                style={{...styles.textField}}
                 onValueChange={(itemValue) => {
                     setMake(itemValue);
                 }}
@@ -108,7 +99,7 @@ const FirstPage = ({ navigation }) => {
             {/* model Picker */}
             <Picker
                 selectedValue={model}
-                style={{...styles.textField, height: 50, width: 90}}
+                style={{...styles.textField}}
                 onValueChange={(itemValue) => {
                     setModel(itemValue);
                 }}
@@ -119,7 +110,7 @@ const FirstPage = ({ navigation }) => {
             <Button
                 title="Go to Jane's profile"
                 onPress={() =>
-                    navigation.navigate('second', {miles: milesTravel, mpg: mpg, gasPrice: gasPricy})
+                    navigation.navigate('second', {miles: 100, mpg: 100, gasPrice: 100})
                 }
             />
             <StatusBar style="auto" />
@@ -128,12 +119,3 @@ const FirstPage = ({ navigation }) => {
 }
 
 export default FirstPage;
-
-function calculatePrice(gasPrice, distance, mpg){
-    console.log(`Price - ${gasPrice}, distance - ${distance}, mpg - ${mpg}`);
-    let ret = (distance / 1760) / mpg;
-    console.log(`(distance / 1760) / mpg = ${ret}`);
-    ret = ret * gasPrice;
-    console.log(`ret * gasPrice = ${ret}`);
-    return Math.round(ret * 100) / 100;
-}
