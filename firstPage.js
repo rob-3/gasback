@@ -50,11 +50,7 @@ const FirstPage = ({ navigation }) => {
   const onPressHandler = async () => {
     if (buttonText === "Start") {
       setButtonText("Stop");
-      let start = await getCurrentLocation();
-      setStartLocation(start);
-      storeData(start);
-    } else if('' === year){
-      setButtonText('Pick Car');
+      setStartLocation(await getCurrentLocation());
     } else {
       setButtonText("Start");
       let end = await getCurrentLocation();
@@ -62,7 +58,7 @@ const FirstPage = ({ navigation }) => {
         calcDistance(startLocation, end),
         getGasPrice(end)
       ]);
-      setTripCost(calculatePrice(gasPrices.gasoline, distance.value, vehicleData[make][model][year].mpg));
+      navigation.navigate('Results', { miles: distance.value, mpg: 30, gasPrice: gasPrices.gasoline});
     }
   };
 
@@ -163,12 +159,3 @@ const FirstPage = ({ navigation }) => {
 }
 
 export default FirstPage;
-
-function calculatePrice(gasPrice, distance, mpg){
-    console.log(`Price - ${gasPrice}, distance - ${distance}, mpg - ${mpg}`);
-    let ret = (distance / 1760) / mpg;
-    console.log(`(distance / 1760) / mpg = ${ret}`);
-    ret = ret * gasPrice;
-    console.log(`ret * gasPrice = ${ret}`);
-    return Math.round(ret * 100) / 100;
-}

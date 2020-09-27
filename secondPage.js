@@ -51,30 +51,30 @@ function calculatePrice(gasPrice, distance, mpg){
 }
 
 const SecondPage = ({route, navigation }) => {
-    var temp;
-    useEffect(() => {
-        temp = calculatePrice(JSON.stringify(route.params.gasPrice), JSON.stringify(route.params.miles), JSON.stringify(route.params.mpg));
-        setCost(temp);
-        setTipAmount(temp * 0.15);
-    }, []);
+  const [cost, setCost] = useState(0);
+  const [TipAmount, setTipAmount] = useState(0);
+  const [sliderValue, setSliderValue] = useState(15);
+  const [total, setTotal] = useState(0);
+  const calculateTip = (tip) => {
+    setTipAmount(cost * (tip/ 100));
+    setSliderValue(tip);
+    setTotal(cost + TipAmount);
+  }
 
-    const [cost, setCost] = useState(0);
-    const [TipAmount, setTipAmount] = useState(0);
-    const [sliderValue, setSliderValue] = useState(15);
-    var total = cost + TipAmount;
-    const calculateTip = (tip) => {
-         setTipAmount(cost * (tip/ 100));
-         setSliderValue(tip);
-         total = cost + TipAmount;
-    }
+  useEffect(() => {
+    let temp = calculatePrice(route.params.gasPrice, route.params.miles, route.params.mpg);
+    setCost(temp);
+    setTipAmount(temp * 0.15);
+    setTotal(temp + temp * 0.15);
+  }, []);
 
 
 return(
     <View style={styles.container}>
         <Text style={styles.titleText}>Amount Owed: ${total.toFixed(2)}</Text>
-        <Text style={styles.subtitleText}>  Distance: {(JSON.stringify(route.params.miles) / 1760).toFixed(2)} mi</Text>
-        <Text style={styles.subtitleText}>  Gas Price: ${(JSON.stringify(route.params.gasPrice) / 1).toFixed(2)} </Text>
-        <Text style={styles.subtitleText}>  MPG: {(JSON.stringify(route.params.mpg) / 1).toFixed(1)}</Text>
+        <Text style={styles.subtitleText}>  Distance: {(route.params.miles / 1760).toFixed(2)} mi</Text>
+        <Text style={styles.subtitleText}>  Gas Price: ${route.params.gasPrice} </Text>
+        <Text style={styles.subtitleText}>  MPG: {route.params.mpg}</Text>
         <View style={styles.container}>
             <Slider style={{width: 200, height: 40}}
                 minimumValue={0}
