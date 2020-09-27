@@ -7,7 +7,7 @@ export async function getGasPrice(location) {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': 'apikey 2igRbnlqeUukasbIbkPobx:1KJw98JISM3mwNBZvPQ8Nb'
+            'Authorization': 'apikey 6Qv60SIQtjRkxAPUd6sh1L:6P4ETvsBxsLOXwUmSqrwne'
         }
     }).then((response) => response.json())
         .then((json) => {
