@@ -61,7 +61,6 @@ const FirstPage = ({ navigation }) => {
         calcDistance(startLocation, end),
         getGasPrice(end)
       ]);
-
       setTripCost(calculatePrice(gasPrices.gasoline, distance.value, vehicleData[make][model][year].mpg));
     }
   };

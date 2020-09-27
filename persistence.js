@@ -2,7 +2,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 
 export async function storeData(data, id){
     try{
-        await AsyncStorage.setItem(`${id}`, data);
+        await AsyncStorage.setItem(`${id}`, JSON.stringify(data));
     }catch(e){
         console.log('storeData - ' + e);
     }
