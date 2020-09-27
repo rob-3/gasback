@@ -19,8 +19,6 @@ const styles = StyleSheet.create({
         fontSize: 20,
         color: '#5bc0be',
         marginBottom: 20,
-        textAlign: 'left',
-        alignSelf: 'stretch'
     },
     textField: {
         height: 40,
@@ -30,30 +28,76 @@ const styles = StyleSheet.create({
         color: '#dbc2cf',
         textAlign: 'center',
         marginBottom: 20
+    },
+    tipPer: {
+        fontSize: 20,
+        color: '#5bc0be',
+        marginBottom: 20,
     }
 });
+function calculatePrice(gasPrice, distance, mpg){
+    console.log(`Price - ${gasPrice}, distance - ${distance}, mpg - ${mpg}`);
+    let ret = (distance / 1760) / mpg;
+    console.log(`(distance / 1760) / mpg = ${ret}`);
+    ret = ret * gasPrice;
+    console.log(`ret * gasPrice = ${ret}`);
+    return Math.round(ret * 100) / 100;
+}
 
 const SecondPage = ({route, navigation }) => {
 
-    const [TipAmount, setTipAmount] = useState(0);
+
+    var temp = calculatePrice(JSON.stringify(route.params.gasPrice), JSON.stringify(route.params.miles), JSON.stringify(route.params.mpg));
+
+
+
+
+    const [cost, setCost] = useState(temp);
+    const [TipAmount, setTipAmount] = useState(cost * 0.15);
+    const [sliderValue, setSliderValue] = useState(15);
+    var total = cost + TipAmount;
+
+    const calculateTip = (tip) => {
+         setTipAmount(cost * (tip/ 100));
+         setSliderValue(tip);
+         total = cost + TipAmount;
+    }
+
 
 return(
     <View style={styles.container}>
-        <Text style={styles.titleText}>Amount Owed: $x.xx</Text>
-        <Text style={styles.subtitleText}>  Distance: {JSON.stringify(route.params.miles)} </Text>
-        <Text style={styles.subtitleText}>  Gas Price: $ {JSON.stringify(route.params.gasPrice)} </Text>
+        <Text style={styles.titleText}>Amount Owed: ${total.toFixed(2)}</Text>
+        <Text style={styles.subtitleText}>  Distance: {(JSON.stringify(route.params.miles) / 1760).toFixed(2)} mi</Text>
+        <Text style={styles.subtitleText}>  Gas Price: ${JSON.stringify(route.params.gasPrice)} </Text>
         <Text style={styles.subtitleText}>  MPG: {JSON.stringify(route.params.mpg)}</Text>
 
-        <Text>
-            <Text style={styles.subtitleText}>  Tip:</Text>
+        <View>
+
             <Slider style={{width: 200, height: 40}}
                     minimumValue={0}
                     maximumValue={100}
+                    value={sliderValue}
+                    step={1}
+                    onValueChange={(sliderValue) => calculateTip(sliderValue)}
                     minimumTrackTintColor="#6fffe9"
                     maximumTrackTintColor="#5bc0be"/>
-            <Text style={styles.subtitleText}>$</Text>
-        </Text>
-        <Button
+                    <View style={{
+                        flex: 1,
+                        flexDirection: 'row',
+                        justifyContent: 'space-between',
+                    }}>
+                        <View>
+                            <Text style={styles.subtitleText}> Tip:${TipAmount.toFixed(2)}</Text>
+                        </View>
+                        <View>
+                            <Text style={styles.tipPer}>{sliderValue}%</Text>
+                        </View>
+
+                    </View>
+
+        </View>
+
+        <Button style={{margin: 50}}
             title="Return"
             color='#b118c8'
             onPress={() =>
