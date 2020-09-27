@@ -10,13 +10,14 @@ const distanceMatrixApi = `https://maps.googleapis.com/maps/api/distancematrix/j
 // returns distanceData which hold text and value fields
 export async function calcDistance(currentLocation, destination){
   let distanceJson;
+  let distanceData;
   try {
     distanceJson = await fetchDistanceData(currentLocation, destination, 'imperial');
+    distanceData = distanceJson.rows[0].elements[0].distance;
   } catch (error) {
     console.log(error);
   }
   //distanceData hold both a text property and a value property
-  const distanceData = distanceJson.rows[0].elements[0].distance;
   return distanceData;
 }
 
