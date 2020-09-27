@@ -102,6 +102,7 @@ const FirstPage = ({ navigation }) => {
         style={{...styles.textField, height: 50, width: 300, color: '#dbc2cf'}}
         onValueChange={(itemValue) => {
           setMake(itemValue);
+          setModel('');
         }}
       >
         <Picker.Item label='Please Select a Make' value=''></Picker.Item>
