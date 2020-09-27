@@ -80,19 +80,17 @@ const FirstPage = ({ navigation }) => {
     );
   }
 
-  let yearList;
+  let yearList = null;
   if(model !== ''){
-    console.log(vehicleData[make][model])
     yearList = vehicleData[make][model];
     yearList = yearList.map(dataPair =>
       dataPair['year']
     );
-    console.log(yearList);
     yearList = yearList.map(year =>
-      <Picker.Item label={year} value={year} key={year}></Picker.Item>
+      <Picker.Item label={`${year}`} value={year} key={year}></Picker.Item>
     )
-    console.log(yearList);
   }
+
   return (
     <View style={styles.container}>
       <Text style ={styles.titleText}>GasBack</Text>
@@ -113,7 +111,7 @@ const FirstPage = ({ navigation }) => {
       {/* model Picker */}
       <Picker
         selectedValue={model}
-        style={{...styles.textField, height: 50, width: 300}}
+        style={{...styles.textField, height: 50, width: 300, color: '#dbc2cf'}}
         onValueChange={(itemValue) => {
           setModel(itemValue);
         }}
@@ -124,10 +122,8 @@ const FirstPage = ({ navigation }) => {
       {/* Year Picker */}
       <Picker
         selectedValue={year}
-        style={{...styles.textField, height: 50, width: 90}}
-        onValueChange={(itemValue) => {
-          setYear(itemValue);
-        }}
+        style={{...styles.textField, height: 50, width: 300, color: '#dbc2cf'}}
+        onValueChange={itemValue => setYear(itemValue)}
       >
         {yearList}
       </Picker>
