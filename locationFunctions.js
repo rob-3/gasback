@@ -9,8 +9,11 @@ const distanceMatrixApi = `https://maps.googleapis.com/maps/api/distancematrix/j
 // Both parameters are coord pairs
 // returns distanceData which hold text and value fields
 export async function calcDistance(currentLocation, destination){
-  const distanceJson = await fetchDistanceData(currentLocation, destination, 'imperial');
-
+  try {
+    const distanceJson = await fetchDistanceData(currentLocation, destination, 'imperial');
+  } catch (error) {
+    console.log(error);
+  }
   //distanceData hold both a text property and a value property
   const distanceData = distanceJson.rows[0].elements[0].distance;
   return distanceData;
@@ -18,16 +21,25 @@ export async function calcDistance(currentLocation, destination){
 
 export async function getCurrentLocation(){
 
+  try {
     let { status } = await Location.requestPermissionsAsync();
-    if (status !== 'granted') {
-        console.log('Permission to access location was denied');
-        //Display Location Permission Error
-        return null;
-    }
+  } catch (error) {
+    console.log(error);
+  }
 
+  if (status !== 'granted') {
+      console.log('Permission to access location was denied');
+      //Display Location Permission Error
+      return null;
+  }
+
+  try {
     let location = await Location.getCurrentPositionAsync({});
-    
-    return [location.coords.latitude, location.coords.longitude];
+  } catch (error) {
+    console.log(error);
+  }
+  
+  return [location.coords.latitude, location.coords.longitude];
 
 }
 
