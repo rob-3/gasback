@@ -58,8 +58,9 @@ const FirstPage = ({ navigation }) => {
         calcDistance(startLocation, end),
         getGasPrice(end)
       ]);
+      const d = distance ? distance : 0;
       const mpg = vehicleData[make][model][year].mpg;
-      navigation.navigate('Results', { miles: distance.value, mpg, gasPrice: gasPrices.gasoline});
+      navigation.navigate('Results', { miles: d, mpg, gasPrice: gasPrices.gasoline});
     }
   };
 
