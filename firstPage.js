@@ -142,12 +142,6 @@ const FirstPage = ({ navigation }) => {
       </Picker>
 
       <Button disabled={make === '' ? true : false} title={buttonText} onPress={onPressHandler} color='#b118c8' />
-      <Button
-        title="Log Persistance Data"
-        onPress={() =>
-            console.log(getData('@make'))
-        }
-      />
       <StatusBar style="auto" />
     </View>
   );
