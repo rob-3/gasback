@@ -42,12 +42,14 @@ return(
         <Text style={styles.subtitleText}>  Gas Price:</Text>
         <Text style={styles.subtitleText}>  MPG:</Text>
 
-        <Slider style={{width: 200, height: 40}}
-                   minimumValue={0}
-                   maximumValue={100}
-                   minimumTrackTintColor="#6fffe9"
-                   maximumTrackTintColor="#5bc0be"/>
-
+        <Text>
+            <Text style={styles.subtitleText}>  Tip:</Text>
+            <Slider style={{width: 200, height: 40}}
+                    minimumValue={0}
+                    maximumValue={100}
+                    minimumTrackTintColor="#6fffe9"
+                    maximumTrackTintColor="#5bc0be"/>
+        </Text>
         <Button
             title="Return"
             color='#b118c8'
