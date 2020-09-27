@@ -1,5 +1,6 @@
 //
 //location is a coord pair
+// TODO add error handling
 export async function getGasPrice(location) {
     var url = `https://api.collectapi.com/gasPrice/fromCoordinates?lng=${location[1]}&lat=${location[0]}`;
     return fetch(url , {
