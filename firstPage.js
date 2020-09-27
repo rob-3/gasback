@@ -142,12 +142,6 @@ const FirstPage = ({ navigation }) => {
 
       <Button title={buttonText} onPress={onPressHandler} color='#b118c8' />
       <Button
-        title="Go to Jane's profile"
-        onPress={() =>
-            navigation.navigate('second')
-        }
-      />
-      <Button
       title="Log Persistance Data"
       onPress={() =>
           console.log(getData('@make'))
