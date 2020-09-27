@@ -60,7 +60,7 @@ const FirstPage = ({ navigation }) => {
             ]);
             milesTravel = distance.value;
             gasPricy = gasPrices.gasoline;
-            navigation.navigate('second', { miles: milesTravel, mpg: 30, gasPrice: gasPricy});
+            navigation.navigate('Results', { miles: milesTravel, mpg: 30, gasPrice: gasPricy});
         }
     };
 
@@ -111,7 +111,7 @@ const FirstPage = ({ navigation }) => {
             <Button
                 title="Go to Jane's profile"
                 onPress={() =>
-                    navigation.navigate('second', {miles: 2000, mpg: 100, gasPrice: 100})
+                    navigation.navigate('Results', {miles: 2000, mpg: 100, gasPrice: 100})
                 }
             />
             <StatusBar style="auto" />

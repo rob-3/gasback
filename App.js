@@ -14,7 +14,7 @@ const App = () => {
             name="Home"
             component={FirstPage}
         />
-        <Stack.Screen name="second" component={SecondPage} />
+        <Stack.Screen name="Results" component={SecondPage} />
       </Stack.Navigator>
     </NavigationContainer>
   );

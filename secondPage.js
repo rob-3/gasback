@@ -73,8 +73,8 @@ return(
     <View style={styles.container}>
         <Text style={styles.titleText}>Amount Owed: ${total.toFixed(2)}</Text>
         <Text style={styles.subtitleText}>  Distance: {(JSON.stringify(route.params.miles) / 1760).toFixed(2)} mi</Text>
-        <Text style={styles.subtitleText}>  Gas Price: ${JSON.stringify(route.params.gasPrice)} </Text>
-        <Text style={styles.subtitleText}>  MPG: {JSON.stringify(route.params.mpg)}</Text>
+        <Text style={styles.subtitleText}>  Gas Price: ${(JSON.stringify(route.params.gasPrice) / 1).toFixed(2)} </Text>
+        <Text style={styles.subtitleText}>  MPG: {(JSON.stringify(route.params.mpg) / 1).toFixed(1)}</Text>
         <View style={styles.container}>
             <Slider style={{width: 200, height: 40}}
                 minimumValue={0}
@@ -89,22 +89,19 @@ return(
                 flexDirection: 'row',
                 justifyContent: 'space-between',
             }}>
-                <View>
-                    <Text style={styles.subtitleText}>Tip:${TipAmount.toFixed(2)}     </Text>
-                </View>
-                <View>
-                    <Text style={styles.tipPer}>     {sliderValue}%</Text>
-                </View>
-            </View>    
-        </View>
+                    <Text style={styles.subtitleText}>Tip: ${TipAmount.toFixed(2)}     </Text>
 
-        <Button style={{margin: 50, marginTop: 40}}
+                    <Text style={styles.tipPer}>     {sliderValue}%</Text>
+            </View> 
+            <Button style={{margin: 50, marginTop: 40}}
             title="Return"
             color='#b118c8'
             onPress={() =>
                 navigation.navigate('Home')
             }
-            />
+            />   
+        </View>
+
     </View>
 );
 
