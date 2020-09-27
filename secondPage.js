@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
 import Slider from "@react-native-community/slider";
+import { vw, vh, vmin, vmax } from 'react-native-expo-viewport-units';
 
 const styles = StyleSheet.create({
     container: {
@@ -10,7 +11,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     titleText: {
-        fontSize: 35,
+        fontSize: vw(10),
         color: '#6fffe9',
         marginBottom: 20,
         justifyContent: 'center'
@@ -35,6 +36,7 @@ const styles = StyleSheet.create({
         marginBottom: 20,
     }
 });
+
 function calculatePrice(gasPrice, distance, mpg){
     console.log(`Price - ${gasPrice}, distance - ${distance}, mpg - ${mpg}`);
     let ret = (distance / 1760) / mpg;
@@ -97,7 +99,7 @@ return(
 
         </View>
 
-        <Button style={{margin: 50}}
+        <Button style={{margin: 50, marginTop: 40}}
             title="Return"
             color='#b118c8'
             onPress={() =>
