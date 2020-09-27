@@ -5,7 +5,7 @@ import { getCurrentLocation, calcDistance } from './locationFunctions';
 import { getGasPrice } from './gasPriceAPI';
 import { Picker } from '@react-native-community/picker';
 import vehicleData from './vehicleData.json';
-import { storeMake } from './persistence';
+import { getMake, storeMake } from './persistence';
 
 const styles = StyleSheet.create({
     container: {
@@ -106,6 +106,7 @@ const FirstPage = ({ navigation }) => {
         style={{...styles.textField, height: 50, width: 300, color: '#dbc2cf'}}
         onValueChange={(itemValue) => {
           setMake(itemValue);
+          storeMake(itemValue);
           setModel('');
           setYear('');
         }}
@@ -146,6 +147,12 @@ const FirstPage = ({ navigation }) => {
             navigation.navigate('second')
         }
       />
+      <Button
+      title="Log Make Persistance"
+      onPress={() =>
+          console.log(getMake('@make'))
+      }
+    />
       <StatusBar style="auto" />
     </View>
   );
