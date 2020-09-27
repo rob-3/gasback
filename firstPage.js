@@ -81,7 +81,7 @@ const FirstPage = ({ navigation }) => {
   }
 
   let yearList = null;
-  if(model !== ''){
+  if(model !== '' && undefined !== vehicleData[make][model]){
     yearList = vehicleData[make][model];
     yearList = yearList.map(dataPair =>
       dataPair['year']
