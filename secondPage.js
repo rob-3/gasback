@@ -40,9 +40,9 @@ const SecondPage = ({route, navigation }) => {
 return(
     <View style={styles.container}>
         <Text style={styles.titleText}>Amount Owed: $x.xx</Text>
-        <Text style={styles.subtitleText}>  Distance: {route.miles} </Text>
-        <Text style={styles.subtitleText}>  Gas Price: $ {route.miles} </Text>
-        <Text style={styles.subtitleText}>  MPG:{route.mpg}</Text>
+        <Text style={styles.subtitleText}>  Distance: {JSON.stringify(route.params.miles)} </Text>
+        <Text style={styles.subtitleText}>  Gas Price: $ {JSON.stringify(route.params.gasPrice)} </Text>
+        <Text style={styles.subtitleText}>  MPG: {JSON.stringify(route.params.mpg)}</Text>
 
         <Text>
             <Text style={styles.subtitleText}>  Tip:</Text>
