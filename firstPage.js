@@ -1,6 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
+import { vw, vh, vmin, vmax } from 'react-native-expo-viewport-units';
 import { getCurrentLocation, calcDistance } from './locationFunctions';
 import { getGasPrice } from './gasPriceAPI';
 import { Picker } from '@react-native-community/picker';
@@ -87,7 +88,7 @@ const FirstPage = ({ navigation }) => {
             {/* Make Picker */}
             <Picker
                 selectedValue={make}
-                style={{...styles.textField}}
+                style={{...styles.textField, height: 50, width: vw(55), color: '#dbc2cf'}}
                 onValueChange={(itemValue) => {
                     setMake(itemValue);
                 }}
@@ -99,7 +100,7 @@ const FirstPage = ({ navigation }) => {
             {/* model Picker */}
             <Picker
                 selectedValue={model}
-                style={{...styles.textField}}
+                style={{...styles.textField, height: 50, width: vw(55)}}
                 onValueChange={(itemValue) => {
                     setModel(itemValue);
                 }}
