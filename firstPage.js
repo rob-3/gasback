@@ -59,7 +59,7 @@ const FirstPage = ({ navigation }) => {
         getGasPrice(end)
       ]);
 
-      setTripCost(calculatePrice(gasPrices.gasoline, distance.value, 30));
+      setTripCost(calculatePrice(gasPrices.gasoline, distance.value, vehicleData[make][model][year].mpg));
     }
   };
 
@@ -82,14 +82,15 @@ const FirstPage = ({ navigation }) => {
     );
   }
 
+  // creates a list of Picker.Items for the years of the supplied model
   let yearList = null;
   if(model !== '' && undefined !== vehicleData[make][model]){
     yearList = vehicleData[make][model];
     yearList = yearList.map(dataPair =>
       dataPair['year']
     );
-    yearList = yearList.map(year =>
-      <Picker.Item label={`${year}`} value={year} key={year}></Picker.Item>
+    yearList = yearList.map((year, index) =>
+      <Picker.Item label={`${year}`} value={index} key={year}></Picker.Item>
     )
   }
 
@@ -129,7 +130,9 @@ const FirstPage = ({ navigation }) => {
       <Picker
         selectedValue={year}
         style={{...styles.textField, height: 50, width: 300, color: '#dbc2cf'}}
-        onValueChange={itemValue => setYear(itemValue)}
+        onValueChange={itemValue => {
+          setYear(itemValue);
+        }}
       >
         <Picker.Item label='Please Select a Year' value=''></Picker.Item>
         {yearList}
