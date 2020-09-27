@@ -49,7 +49,9 @@ const FirstPage = ({ navigation }) => {
   const onPressHandler = async () => {
     if (buttonText === "Start") {
       setButtonText("Stop");
-      setStartLocation(await getCurrentLocation());
+      let start = await getCurrentLocation();
+      setStartLocation(start);
+      storeData(start);
     } else if('' === year){
       setButtonText('Pick Car');
     } else {
@@ -150,7 +152,7 @@ const FirstPage = ({ navigation }) => {
         }
       />
       <Button
-      title="Log Make Persistance"
+      title="Log Persistance Data"
       onPress={() =>
           console.log(getData('@make'))
       }
