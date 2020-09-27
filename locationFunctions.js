@@ -9,8 +9,9 @@ const distanceMatrixApi = `https://maps.googleapis.com/maps/api/distancematrix/j
 // Both parameters are coord pairs
 // returns distanceData which hold text and value fields
 export async function calcDistance(currentLocation, destination){
+    let distanceJson;
   try {
-    const distanceJson = await fetchDistanceData(currentLocation, destination, 'imperial');
+    distanceJson = await fetchDistanceData(currentLocation, destination, 'imperial');
   } catch (error) {
     console.log(error);
   }
@@ -20,9 +21,9 @@ export async function calcDistance(currentLocation, destination){
 }
 
 export async function getCurrentLocation(){
-
+  let status = null;
   try {
-    let { status } = await Location.requestPermissionsAsync();
+    status = await (await Location.requestPermissionsAsync()).status;
   } catch (error) {
     console.log(error);
   }
@@ -32,13 +33,15 @@ export async function getCurrentLocation(){
       //Display Location Permission Error
       return null;
   }
-
+  let location;
   try {
-    let location = await Location.getCurrentPositionAsync({});
+    location = await Location.getCurrentPositionAsync({});
   } catch (error) {
     console.log(error);
   }
-  
+
+  console.log(location);
+
   return [location.coords.latitude, location.coords.longitude];
 
 }
