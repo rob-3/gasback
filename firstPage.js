@@ -43,6 +43,8 @@ const FirstPage = ({ navigation }) => {
     const [make, setMake] = useState('');
     const [model, setModel] = useState('');
     const [mpg, setMpg] = useState('');
+    var milesTravel = 0;
+    var gasPricy = 0;
 
     const onPressHandler = async () => {
         if (buttonText === "Start") {
@@ -55,8 +57,10 @@ const FirstPage = ({ navigation }) => {
                 calcDistance(startLocation, end),
                 getGasPrice(end)
             ]);
-
+            milesTravel = distance.value;
+            gasPricy = gasPrices.gasoline;
             setTripCost(calculatePrice(gasPrices.gasoline, distance.value, 30));
+            navigation.navigate('second', {miles: milesTravel, mpg: mpg, gasPrice: gasPricy})
         }
     };
 
@@ -115,7 +119,7 @@ const FirstPage = ({ navigation }) => {
             <Button
                 title="Go to Jane's profile"
                 onPress={() =>
-                    navigation.navigate('second')
+                    navigation.navigate('second', {miles: milesTravel, mpg: mpg, gasPrice: gasPricy})
                 }
             />
             <StatusBar style="auto" />

@@ -33,14 +33,16 @@ const styles = StyleSheet.create({
     }
 });
 
-const SecondPage = ({ navigation }) => {
+const SecondPage = ({route, navigation }) => {
+
+    const [TipAmount, setTipAmount] = useState(0);
 
 return(
     <View style={styles.container}>
         <Text style={styles.titleText}>Amount Owed: $x.xx</Text>
-        <Text style={styles.subtitleText}>  Distance:</Text>
-        <Text style={styles.subtitleText}>  Gas Price:</Text>
-        <Text style={styles.subtitleText}>  MPG:</Text>
+        <Text style={styles.subtitleText}>  Distance: {route.miles} </Text>
+        <Text style={styles.subtitleText}>  Gas Price: $ {route.miles} </Text>
+        <Text style={styles.subtitleText}>  MPG:{route.mpg}</Text>
 
         <Text>
             <Text style={styles.subtitleText}>  Tip:</Text>
@@ -49,6 +51,7 @@ return(
                     maximumValue={100}
                     minimumTrackTintColor="#6fffe9"
                     maximumTrackTintColor="#5bc0be"/>
+            <Text style={styles.subtitleText}>$</Text>
         </Text>
         <Button
             title="Return"
